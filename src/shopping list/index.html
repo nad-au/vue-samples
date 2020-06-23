@@ -15,22 +15,32 @@
 
 <body>
     <div id="app" class="container">
-        <h1>Hello, world!</h1>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col">
-                <div class="input-group mb-3">
-                    <input v-model="newItem" v-on:keyup.enter="addItem" type="text" class="form-control" placeholder="Add an item">
-                    <div class="input-group-append">
-                        <button v-on:click="addItem" class="btn btn-primary" type="button">Add</button>
+                <h1>SHOPPING LIST</h1>
+            </div>
+            <div class="col">
+                <button v-if="!editMode" @click="editMode = true" class="btn btn-primary float-right">Edit</button>
+                <button v-if="editMode" @click="editMode = false" class="btn btn-danger float-right">Cancel</button>
+            </div>
+        </div>
+        <div v-if="editMode">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input v-model="newItem" @keyup.enter="addItem" type="text" class="form-control" placeholder="Add an item">
+                        <div class="input-group-append">
+                            <button @click="addItem" class="btn btn-primary" type="button">Add</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <ul class="list-group">
-                    <li v-for="item in items" class="list-group-item"> {{ item }}</li>
-                </ul>
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group">
+                        <li v-for="item in items" class="list-group-item"> {{ item }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -51,6 +61,7 @@
         var app = new Vue({
             el: '#app',
             data: {
+                editMode: false,
                 newItem: '',
                 items: [
                     'Bread',
