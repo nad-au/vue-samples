@@ -19,9 +19,9 @@
         <div class="row">
             <div class="col">
                 <div class="input-group mb-3">
-                    <input v-model="newItem" type="text" class="form-control" placeholder="Add an item">
+                    <input v-model="newItem" v-on:keyup.enter="addItem" type="text" class="form-control" placeholder="Add an item">
                     <div class="input-group-append">
-                        <button v-on:click="items.push(newItem)" class="btn btn-primary" type="button">Add</button>
+                        <button v-on:click="addItem" class="btn btn-primary" type="button">Add</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +58,12 @@
                     'Eggs',
                     'Onions',
                 ]
+            },
+            methods: {
+                addItem: function() {
+                    this.items.push(this.newItem);
+                    this.newItem = null;
+                }
             }
         })
     </script>
