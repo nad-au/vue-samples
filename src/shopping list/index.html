@@ -21,15 +21,15 @@
                 <div class="input-group mb-3">
                     <input v-model="newItem" type="text" class="form-control" placeholder="Add an item">
                     <div class="input-group-append">
-                        <button v-on:click="items.push(newItem)" class="btn btn-primary" type="button">Button</button>
+                        <button v-on:click="items.push(newItem)" class="btn btn-primary" type="button">Add</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <ul>
-                    <li v-for="item in items"> {{ item }}</li>
+                <ul class="list-group">
+                    <li v-for="item in items" class="list-group-item"> {{ item }}</li>
                 </ul>
             </div>
         </div>
@@ -52,7 +52,12 @@
             el: '#app',
             data: {
                 newItem: '',
-                items: []
+                items: [
+                    'Bread',
+                    'Milk',
+                    'Eggs',
+                    'Onions',
+                ]
             }
         })
     </script>
