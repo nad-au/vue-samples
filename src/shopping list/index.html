@@ -30,7 +30,7 @@
                     <div class="input-group mb-3">
                         <input v-model="newItem" @keyup.enter="addItem" type="text" class="form-control" placeholder="Add an item">
                         <div class="input-group-append">
-                            <button @click="addItem" class="btn btn-primary" type="button">Add</button>
+                            <button @click="addItem" :disabled="isNewItemEmpty" class="btn btn-primary" type="button">Add</button>
                         </div>
                     </div>
                 </div>
@@ -70,10 +70,16 @@
                     'Onions',
                 ]
             },
+            computed: {
+                isNewItemEmpty: function() {
+                    return this.newItem.length === 0;
+                }
+            },
             methods: {
                 addItem: function() {
+                    if (this.isNewItemEmpty) return;
                     this.items.push(this.newItem);
-                    this.newItem = null;
+                    this.newItem = '';
                 }
             }
         })
