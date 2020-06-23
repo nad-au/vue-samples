@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <style>
+        .strikeout {
+            text-decoration: line-through;
+        }
+    </style>
+    
     <title>Hello, world!</title>
 </head>
 
@@ -38,7 +44,7 @@
             <div class="row">
                 <div class="col">
                     <ul class="list-group">
-                        <li v-for="item in items" class="list-group-item"> {{ item }}</li>
+                        <li @click="item.deleted = !item.deleted" :class="{ strikeout: item.deleted }" v-for="item in items" class="list-group-item"> {{ item.name }}</li>
                     </ul>
                 </div>
             </div>
@@ -53,10 +59,22 @@
                 editMode: false,
                 newItem: '',
                 items: [
-                    'Bread',
-                    'Milk',
-                    'Eggs',
-                    'Onions',
+                    {
+                        name: 'Bread',
+                        deleted: false
+                    },
+                    {
+                        name: 'Milk',
+                        deleted: true
+                    },
+                    {
+                        name: 'Eggs',
+                        deleted: false
+                    },
+                    {
+                        name: 'Onions',
+                        deleted: false
+                    }
                 ]
             },
             computed: {
@@ -67,7 +85,10 @@
             methods: {
                 addItem: function() {
                     if (this.isNewItemEmpty) return;
-                    this.items.push(this.newItem);
+                    this.items.push({
+                        name: this.newItem,
+                        deleted: false
+                    });
                     this.newItem = '';
                 }
             }
